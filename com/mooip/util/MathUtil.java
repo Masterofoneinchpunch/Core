@@ -138,6 +138,34 @@ public final class MathUtil {
         return bi;
     }
 
+    
+    /**
+     * Gets the number of divisors.  Uses prime factorization.
+     * 
+     * @param number The number you are using to get the amount of divisors.
+     * @return totalFactors The total amount of factors.
+     * @see nice solution here: https://bit.ly/3m42S2G
+     * @see explanation here: https://bit.ly/3Sqc913
+     */
+    public static int numOfDivisors(long number) {
+        long x = 2;
+        int totalFactors = 1;
+        while ((x*x) <= number) {
+            int power = 0;
+            while (number % x == 0) {
+                power++;
+                number /= x;
+            }
+            totalFactors *= (power + 1);
+            x += 1;
+        }
+        
+        if (number != 1) {
+            totalFactors *= 2;
+        }
+        return totalFactors;
+    }
+    
     public static int sumProperDivisors(final long number) {
         // the number always has its own number as a divisor
         int sumProperDivisors = 0;
