@@ -179,6 +179,12 @@ public final class MathUtil {
         return totalFactors;
     }
     
+    /**
+     * Sum of the proper divisors.
+     * 
+     * @param number The passed in number
+     * @return sumProperDivisors The sum of the proper divisors.
+     */
     public static int sumProperDivisors(final long number) {
         // the number always has its own number as a divisor
         int sumProperDivisors = 0;
