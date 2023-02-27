@@ -136,17 +136,22 @@ public final class MathUtil {
         return result;
     }
     
-    public static BigInteger getFactorial(short fact) {
-        BigInteger bi = new BigInteger("1");
+    /**
+     * Gets the factorial of the passed in value.
+     * 
+     * @param number The number you are going to return a factorial of.
+     * @return factorial The factorial of the passed in number.
+     */
+    public static BigInteger getFactorial(short number) {
+        BigInteger factorial = new BigInteger("1");
         
-        for (int i = 2; i <= fact; i++) {
-            bi = bi.multiply(new BigInteger(Integer.toString(i)));
+        for (int i = 2; i <= number; i++) {
+            factorial = factorial.multiply(new BigInteger(Integer.toString(i)));
         }
         
-        return bi;
+        return factorial;
     }
 
-    
     /**
      * Gets the number of divisors.  Uses prime factorization.
      * 
