@@ -39,10 +39,16 @@ public final class StringUtil {
         return str.equals(reverseString);
     }
     
-    // works up to a thousand
+    // 
+    /**
+     * Returns a number as word.  This works up to a thousand.  Ex. 1000 becomes One thousand.
+     * 
+     * @param number The passed in number.
+     * @return numberAsWord The number as word.
+     */
     public static String numberAsWord(Integer number) {
         StringBuilder numberAsWord = new StringBuilder("");
-        String passedNum = number.toString();
+        final String passedNum = number.toString();
         if (passedNum.length() == 4) {
             int index = Character.digit(passedNum.charAt(0), 10);
             numberAsWord.append(numberNames[index]).append(" thousand");
