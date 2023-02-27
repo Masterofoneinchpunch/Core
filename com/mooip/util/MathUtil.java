@@ -90,6 +90,14 @@ public final class MathUtil {
     }
     
     
+    /**
+     * Add each digit of the passed in string.
+     * 
+     * @param number The passed in string (should be a number).
+     * @return sum The summation of the passed in string.
+     * @throws NullPointerException if the parameter is null.
+     * @throws IllegalArgumentException if the passed in string is not a number.
+     */
     public static long addStringDigits(String number) {
         if (number == null) {
             throw new NullPointerException("The parameter number in addString method should not be null!");
@@ -98,15 +106,15 @@ public final class MathUtil {
             throw new IllegalArgumentException(number + " is not a number.");
         }
         
-        char[] numbers = number.toCharArray();
-        long result = 0;
+        final char[] numbers = number.toCharArray();
+        long sum = 0;
         
         for (char charNum : numbers) {
-            int num = Character.digit(charNum, 10);
-            result += num;
+            final int num = Character.digit(charNum, 10);
+            sum += num;
         }
         
-        return result;
+        return sum;
     }
 
     public static long addFactorialDigits(String number) {
