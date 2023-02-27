@@ -137,7 +137,13 @@ public final class StringUtil {
         return mat.find();
     }
 
-    //I noticed that this does not work with patterns such as "1111611116"
+    /**
+     * Finds the longest repeating pattern.
+     * 
+     * @param str The past in string to look through.
+     * @return repeatingPattern The longest repeating pattern.
+     */
+    //TODO: I noticed that this does not work with patterns such as "1111611116"
     public static String longestRepeatingPattern(String str){		
         String repeatingPattern = null;
         final String regex = "(.+?)(?:\\1)+";
