@@ -114,12 +114,18 @@ public final class StringUtil {
         return sb.toString();
     }
 
-    public static int alphabeticScore(String value) {
-        value = value.toUpperCase();
+    /**
+     * Gets the alphabetic score according to each letter in the string.
+     * 
+     * @param str The string passed in.
+     * @return alphabeticScore The alphabetic score.
+     */
+    public static int alphabeticScore(String str) {
+        str = str.toUpperCase();
         final int startValue = (int)'A' - 1;
         int alphabeticScore = 0;
-        for (int i = 0; i < value.length(); i++) {
-            alphabeticScore += (value.charAt(i) - startValue);
+        for (int i = 0; i < str.length(); i++) {
+            alphabeticScore += (str.charAt(i) - startValue);
         }
         return alphabeticScore;
     }
