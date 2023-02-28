@@ -35,6 +35,14 @@ public final class MathUtil {
         return result;
     }    
     
+    /**
+     * Gets the combinatoric value with the given n and r.
+     * 
+     * @param n The number of things that we have to choose from.
+     * @param r The number that represents the number of things that we choose from 'n'.
+     * @return The amount of ways of selecting r from n.
+     * @see <a href="https://en.wikipedia.org/wiki/Combinatorics">Combinatorics</a>
+     */
     public static BigInteger combinatoric(int n, int r) {
         BigInteger bi = factorialBig(n);
         BigInteger denom = factorialBig(r);
