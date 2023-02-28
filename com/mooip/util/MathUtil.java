@@ -12,6 +12,11 @@ public final class MathUtil {
     private MathUtil() {
     }
 
+    /**
+     * Recursive solution for factorial.  Only use for small n.
+     * @param n The number to factorial.
+     * @return factorial The factorial number of the number passed in.
+     */
     public static long factorial(int n) {
         if ((n > 1)) {
             return factorial(n-1) * n; /* Recursive case */
