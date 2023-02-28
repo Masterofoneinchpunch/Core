@@ -130,9 +130,16 @@ public final class StringUtil {
         return alphabeticScore;
     }
 
-    public static boolean matchRegex(final String regex, final String inputString) {
+    /**
+     * Does the input string match the passed in regex?
+     * 
+     * @param regex The regex pattern passed in.
+     * @param str The passed in string.
+     * @return boolean A true if the string matches, a false if not.
+     */
+    public static boolean matchRegex(final String regex, final String str) {
         Pattern pat = Pattern.compile(regex);
-        Matcher mat = pat.matcher(inputString);
+        Matcher mat = pat.matcher(str);
 
         return mat.find();
     }
