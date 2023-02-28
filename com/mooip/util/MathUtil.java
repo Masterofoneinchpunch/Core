@@ -293,6 +293,13 @@ public final class MathUtil {
         return gcd.intValue();
     }
 
+    /**
+     * Does the two passed in numbers have the same digits?
+     * 
+     * @param n1 Number one.
+     * @param n2 Number two.
+     * @return boolean A true if the numbers have the same digits; false if otherwise.
+     */
     public static boolean sameDigits(int n1, int n2) {
         String firstValue = String.valueOf(n1);
         String nextValue = String.valueOf(n2);
