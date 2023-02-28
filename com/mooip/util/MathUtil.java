@@ -329,7 +329,14 @@ public final class MathUtil {
         return (int) i * (2*i - 1);
     }
     
-    // formula Pn=n(3n−1)/2
+    /**
+     * Returns a pentagonal number given the sequence.
+     * Formula is Pn=n(3n−1)/2.
+     * 
+     * @param i The sequence number.
+     * @return pentNum The pentagonal number given the sequence.
+     * @see <a href="https://bit.ly/41AQt6m">Pentagonal Number definition</a>
+     */
     public static int pentagonalNumber(int i) {
         return i * (3 * i - 1) / 2;
     }
@@ -339,7 +346,7 @@ public final class MathUtil {
      * Formula is tn = ½n(n+1).
      * 
      * @param i The sequence number.
-     * @return triNum The Triangle Number given the sequence.
+     * @return triNum The triangle number given the sequence.
      * @see <a href="https://bit.ly/3EJn5Bc">Triangle Number definition</a>
      */
     public static int triangleNumber(int i) {
