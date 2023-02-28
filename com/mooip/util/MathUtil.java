@@ -184,9 +184,9 @@ public final class MathUtil {
      * 
      * @param number The passed in number
      * @return sumProperDivisors The sum of the proper divisors.
+     * @todo Rewrite this to use prime factorization.
      */
     public static int sumProperDivisors(final long number) {
-        // the number always has its own number as a divisor
         int sumProperDivisors = 0;
         
         for (long i = number / 2; i > 0; i--) {
@@ -220,7 +220,13 @@ public final class MathUtil {
         return (gcd(a,b) == 1);
     }
     
-    //Euclid's algorithm
+    /**
+     * Greatest Common Denominator using Euclid's algorithm.
+     * 
+     * @param a The first variable.
+     * @param b The second variable.
+     * @return gcd The Greatest Common Denominator.
+     */
     public static int gcd(int a, int b) {
         while (b != 0) {
             int t = a;
