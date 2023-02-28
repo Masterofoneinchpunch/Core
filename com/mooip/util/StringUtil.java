@@ -185,6 +185,12 @@ public final class StringUtil {
         return StringUtil.matchRegex(PAN_DIGITAL, str);
     }
 
+    /**
+     * Checks to see if the string is pandigital.
+     * 
+     * @param str The string to check.
+     * @return boolean A true if the string is pandigital (has to have a length of 9), a false if not.s
+     */
     public static boolean isPanDigitalNine(final String str) {
         if (str.length() != 9) {
             return false;
