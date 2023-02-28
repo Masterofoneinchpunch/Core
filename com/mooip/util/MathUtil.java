@@ -70,6 +70,12 @@ public final class MathUtil {
         return true;
     }
 
+    /**
+     * Gets the primes up until the maximum value;
+     * 
+     * @param maxValue The maximum value.
+     * @return primes A List of primes.
+     */
     public static List<Integer> getPrimes(int maxValue) {
         List<Integer> primes = new ArrayList<Integer>();
         primes.add(2);
