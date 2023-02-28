@@ -334,7 +334,14 @@ public final class MathUtil {
         return i * (3 * i - 1) / 2;
     }
 
-    // formula tn = ½n(n+1)
+    /**
+     * Returns a triangle number given the sequence.
+     * Formula is tn = ½n(n+1).
+     * 
+     * @param i The sequence number.
+     * @return triNum The Triangle Number given the sequence.
+     * @see <a href="https://bit.ly/3EJn5Bc">Triangle Number definition</a>
+     */
     public static int triangleNumber(int i) {
         return (int) ((i + 1) * ((double)i/2));
     }
