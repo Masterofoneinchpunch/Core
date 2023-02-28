@@ -219,10 +219,24 @@ public final class MathUtil {
          return sum;
     }    
 
+    /**
+     * Gets the nth digit for the passed in number.  This is quite quick.
+     * 
+     * @param number The number you are looking through.
+     * @param n the digit (2nd digit of 2345 from right would be 4)
+     * @return nth The nth digit.
+     */
     public static int getNthDigit(int number, int n) {    
         return (int) ((number / Math.pow(10, n - 1)) % 10);
     }    
 
+    /**
+     * Gets the nth digit for the passed in number.  This is quite quick.
+     * 
+     * @param number The number you are looking through.
+     * @param n the digit (2nd digit of 2345 from right would be 4)
+     * @return nth The nth digit.
+     */
     public static int getNthDigit(long number, int n) {    
         return (int) ((number / Math.pow(10, n - 1)) % 10);
     }    
