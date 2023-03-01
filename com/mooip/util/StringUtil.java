@@ -205,6 +205,12 @@ public final class StringUtil {
         return StringUtil.matchRegex(PAN_DIGITAL_NINE, str);
     }
     
+    /**
+     * Sorts the string passed in.
+     * 
+     * @param str The string to be sorted.
+     * @return sortStr A sorted string.
+     */
     public static String sortString(String str) {
         char[] strA = str.toCharArray();
         Arrays.sort(strA);
