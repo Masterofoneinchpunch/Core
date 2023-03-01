@@ -275,7 +275,12 @@ public final class MathUtil {
         return a;
     }    
 
-    //Totient (aka phi) Function: https://bit.ly/3R2sbh5 
+    /**
+     * Gets the relative primes count.  This is the Totient (aka Phi) Function. 
+     * @param n The number to check.
+     * @return totient The relative primes for the passed in number.
+     * @see https://bit.ly/3R2sbh5
+     */
     public static int getRelativePrimesCount(int n) {
         int totient = n; //this will be the totient at the end of the sample
         for (int p = 2; p*p <= n; p++) {
