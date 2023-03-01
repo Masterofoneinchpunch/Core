@@ -217,6 +217,12 @@ public final class StringUtil {
         return String.valueOf(strA);
     }
     
+    /** 
+     * Checks to see if both strings are a permutation of each other.
+     * @param str The first string.
+     * @param str2 The second string.
+     * @return boolean A true if they are a permutation, a false if not.
+     */
     public static boolean isPermutation(String str, String str2) {
         final String sortedStr = sortString(str);
         final String sortedStr2 = sortString(str2);
