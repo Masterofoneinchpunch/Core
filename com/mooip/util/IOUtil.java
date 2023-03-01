@@ -104,6 +104,7 @@ public final class IOUtil {
      * 
      * @param fullPathName The full path to retrieve the file.
      * @return reader A BufferedReader.
+    * @throws RuntimeException if the file is not found given the path.
      */
     public static BufferedReader getBufferedFileReader(String fullPathName) {
         try {
@@ -115,6 +116,13 @@ public final class IOUtil {
         }
     }
     
+    /**
+     * Gets the scanner for the passed in file path and name.
+     * 
+     * @param fullPathName The full path name.
+     * @return reader A Scanner.
+     * @throws RuntimeException if the file is not found given the path.
+     */
     public static Scanner getScanner(String fullPathName) {
         try {
             Scanner reader = new Scanner(new File(fullPathName));
