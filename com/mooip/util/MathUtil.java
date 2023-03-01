@@ -97,6 +97,13 @@ public final class MathUtil {
     }
 
     // currently start value has to be odd
+    /**
+     * Gets the primes up until the maximum value from the start value;
+     * 
+     * @param startValue The starting value (has to be odd).
+     * @param maxValue The maximum value.
+     * @return primes A List of primes.
+     */
     public static Set<Integer> getPrimes(int startValue, int maxValue) {
         Set<Integer> primes = new TreeSet<Integer>();
         for (int i = startValue; i <= maxValue; i += 2) {
@@ -107,8 +114,7 @@ public final class MathUtil {
         
         return primes;
     }
-    
-    
+       
     /**
      * Add each digit of the passed in string.
      * 
