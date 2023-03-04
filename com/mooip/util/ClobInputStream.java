@@ -18,9 +18,9 @@ public final class ClobInputStream {
     final private InputStream in;
 
     /** 
-     * Creates a new {@link ClobInputStream}.
+     * Creates a new ClobInputStream.
      * 
-     * @param clob the {@link java.sql.Clob} to create the stream for.
+     * @param clob The {@link java.sql.Clob} to create the stream for.
      * @throws IOException if unable to create stream from clob.
      * @throws java.sql.SQLException
      */
@@ -86,7 +86,7 @@ public final class ClobInputStream {
     }
     
     /**
-     * This gets the Clob in String form; so far up until 2 to 31 power (Max Integer).
+     * This gets the clob in String form; so far up until 2 to 31 power (Max Integer).
      *
      * @return String The clob in String form.
      * @throws RuntimeException if there is a SQLException.
