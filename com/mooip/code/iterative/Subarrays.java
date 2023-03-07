@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SubArrays.
+ * SubArrays. This is O(n2) algorithm.
  * 
  * @author masterofoneinchpunch
  */
