@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 /**
  * Utility class for IO related actions.
- * The goal of this class is to reduce duplicate code.
  * 
  * @author masterofoneinchpunch
  */
@@ -28,9 +27,9 @@ public final class IOUtil {
      * This method is very memory intensive
      * !!! Only use for very small files!!!
      *
-     * @param in The InputStream of the file to read in
+     * @param in The InputStream of the file to read in.
      * @throws IOException
-     * @return the contents of the file as a string
+     * @return the contents of the file as a String.
      */
     public static String readFile(InputStream in) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -39,10 +38,10 @@ public final class IOUtil {
     }
 
     /**
-     * Writes an InputStream to an OutputStream
+     * Writes an InputStream to an OutputStream.
      *
-     * @param in The InputStream to read in
-     * @param out The OutputStream to write to
+     * @param in The InputStream to read in.
+     * @param out The OutputStream to write to.
      * @throws IOException
      */
     public static void writeStreamOut(InputStream in, OutputStream out) throws IOException {
@@ -54,10 +53,10 @@ public final class IOUtil {
     }
 
     /**
-     * Writes an InputStream to a Writer
+     * Writes an InputStream to a Writer.
      *
-     * @param sin The InputStream to read in
-     * @param out The Writer to write to
+     * @param sin The InputStream to read in.
+     * @param out The Writer to write to.
      * @throws IOException
      */
     public static void writeStreamOut(InputStream sin, Writer out) throws IOException {
@@ -110,8 +109,7 @@ public final class IOUtil {
      */
     public static BufferedReader getBufferedFileReader(String fullPathName) {
         try {
-            final BufferedReader reader = new BufferedReader(new FileReader(fullPathName));
-            
+            final BufferedReader reader = new BufferedReader(new FileReader(fullPathName));           
             return reader;
         } catch (FileNotFoundException fnfe) {
             throw new RuntimeException("File: " + fullPathName + " does not exist." + fnfe);
