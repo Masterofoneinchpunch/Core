@@ -15,6 +15,8 @@ import java.util.Scanner;
 /**
  * Utility class for IO related actions.
  * The goal of this class is to reduce duplicate code.
+ * 
+ * @author masterofoneinchpunch
  */
 public final class IOUtil {
     private static final int BUFFER_SIZE = 32768;
@@ -59,7 +61,7 @@ public final class IOUtil {
      * @throws IOException
      */
     public static void writeStreamOut(InputStream sin, Writer out) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(sin));
+        final BufferedReader in = new BufferedReader(new InputStreamReader(sin));
         char[] buffer = new char[BUFFER_SIZE];
         int size;
         while ((size = in.read(buffer)) != -1) {
@@ -76,7 +78,7 @@ public final class IOUtil {
      */
     public static boolean createDirectoryIfDoesNotExist(String strDir){
         boolean flag;
-        File dir = new File(strDir);
+        final File dir = new File(strDir);
         
         if(dir.exists() && dir.isDirectory()) {
             flag = true;
@@ -95,7 +97,7 @@ public final class IOUtil {
      * @return fileExists A true if the file exists otherwise a false.
      */
     public static boolean doesFileExist(String filePath) {
-        File file = new File(filePath);
+        final File file = new File(filePath);
         return file.exists();
     }
     
@@ -104,11 +106,11 @@ public final class IOUtil {
      * 
      * @param fullPathName The full path to retrieve the file.
      * @return reader A BufferedReader.
-    * @throws RuntimeException if the file is not found given the path.
+     * @throws RuntimeException if the file is not found given the path.
      */
     public static BufferedReader getBufferedFileReader(String fullPathName) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fullPathName));
+            final BufferedReader reader = new BufferedReader(new FileReader(fullPathName));
             
             return reader;
         } catch (FileNotFoundException fnfe) {
@@ -125,13 +127,12 @@ public final class IOUtil {
      */
     public static Scanner getScanner(String fullPathName) {
         try {
-            Scanner reader = new Scanner(new File(fullPathName));
+            final Scanner reader = new Scanner(new File(fullPathName));
             
             return reader;
         } catch (FileNotFoundException fnfe) {
             throw new RuntimeException("File: " + fullPathName + " does not exist." + fnfe);
         }
-    }
-    
+    }   
 }
 
