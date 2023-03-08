@@ -6,14 +6,14 @@ import java.util.List;
 /**
  * An utility class for lists.
  * 
- * @author smckenna
+ * @author masterofoneinchpunch
  */
 public final class ListUtil {
     private ListUtil() {
     }
 
     /**
-     * Changes an integer list into an int array.
+     * Changes an Integer list into an int array.
      * 
      * @param list The Integer list.
      * @return arr The integer array.
@@ -29,7 +29,7 @@ public final class ListUtil {
     }
     
     /**
-     * Changes an integer list into an int array.
+     * Changes an int array into an Integer list.
      * 
      * @param arr The integer array.
      * @return newList The Integer list.
@@ -48,6 +48,7 @@ public final class ListUtil {
      * 
      * @param list1 The first list.
      * @param list2 The second list.
+     * @param <T> the type of the element.
      * @return minus A list of all the first list items not in the second list.
      */
     public static <T> List<T> minus(List<T> list1, List<T> list2) {
@@ -74,4 +75,19 @@ public final class ListUtil {
         
         return Long.valueOf(sb.toString());
     }  
+    
+    /**
+     * Turn a list into a string.
+     * 
+     * @param list Any list you want into string form.
+     * @param <T> the type of the element.
+     * @return listToString The list as a string.
+     */
+    public static <T> String listToString(List<T> list) {
+        StringBuilder sb = new StringBuilder();
+        for (T s : list) {
+            sb.append(s.toString());
+        }
+        return sb.toString();
+    }
 }
