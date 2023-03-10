@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public final class MathUtil {
-    
+public final class MathUtil {   
     private MathUtil() {
     }
 
@@ -369,7 +368,40 @@ public final class MathUtil {
         
         return subsets;
     }
+
+    /**
+     * Square Root Algorithm to find square root digits from Frazer Jarvis found on Wiki page.
+     * 
+     * @param n The number to square root.
+     * @param digits The amount of digits you need to return.
+     * @return BigInteger A BigInteger with the amount of square root digits you want.
+     * @see https://web.archive.org/web/20220410042055/http://www.afjarvis.staff.shef.ac.uk/maths/jarvisspec02.pdf
+     * @see https://github.com/dcrousso/ProjectEuler/blob/master/PE080.java 
+     */
+    public static BigInteger squareRootDigits(final int n, int digits) {
+        int sqrInt = (int) Math.sqrt(n);
+        if (sqrInt * sqrInt == n) {
+            return new BigInteger(Integer.toString(n));
+        }
         
+        final BigInteger FIVE = BigInteger.valueOf(5);
+        final BigInteger ONE_HUNDRED = BigInteger.valueOf(100);
+        
+        BigInteger a = BigInteger.valueOf(n * 5);
+        BigInteger b = FIVE;
+        while (b.compareTo(BigInteger.TEN.pow(digits + 1)) < 0) {
+            if (a.compareTo(b) >= 0) {
+                a = a.subtract(b);
+                b = b.add(BigInteger.TEN);
+            } else {
+                a = a.multiply(ONE_HUNDRED);
+                b = b.divide(BigInteger.TEN).multiply(ONE_HUNDRED).add(FIVE);                                        
+            }
+        }
+
+        return b.divide(ONE_HUNDRED);
+    }
+
     // formula Hn=n(2n−1)
     public static int hexagonalNumber(int i) {
         return (int) i * (2*i - 1);
