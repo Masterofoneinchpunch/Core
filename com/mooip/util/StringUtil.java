@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class StringUtil {
-
+    public static final String NEWLINE = System.getProperty("line.separator");
+    
     // https://stackoverflow.com/questions/758717/pandigital-regex
     public static final String PAN_DIGITAL_NINE = "^(?!.*([1-9]).*\\1)[1-9]{9}$";
     public static final String PAN_DIGITAL = "^(?!.*([1-9]).*\\1)[1-9]{2,9}$";
@@ -229,4 +230,25 @@ public final class StringUtil {
 
         return sortedStr.equals(sortedStr2);
     }
+    
+    /**
+     * Turn a Matrix into a string.
+     * 
+     * @param matrix The integer matrix.
+     * @return sb The String of the matrix.
+     * TODO: add padding for longest member in a column.
+     */
+    public static String matrixToString(int[][] matrix) {
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < matrix.length; i++) {
+            final int WIDTH = matrix[i].length;
+            for (int j = 0; j < WIDTH; j++) {
+                sb.append(matrix[i][j]).append(" ");
+            }
+            sb.append(NEWLINE);
+        }
+        
+        return sb.toString();
+    }    
 }
