@@ -31,5 +31,21 @@ public final class NumberUtil {
         }
         
         return Float.parseFloat(num);
-    }   
+    }
+    
+    /**
+     * Changes an int array into an Integer array.
+     * 
+     * @param arr The integer array.
+     * @return newIntegerArray The Integer array.
+     */
+    public static Integer[] toIntegerArray(int[] arr) {
+        Integer[] newIntegerArray = new Integer[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            newIntegerArray[i] = arr[i];
+        }
+        
+        return newIntegerArray;
+    }
+    
 }
