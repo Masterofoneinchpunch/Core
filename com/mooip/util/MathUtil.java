@@ -402,6 +402,25 @@ public final class MathUtil {
         return b.divide(ONE_HUNDRED);
     }
 
+    /**
+     * The sum of a sequence.  For example if 5 is passed in (5 + 4 + 3 + 2 + 1)
+     * will be returned. 
+     * 
+     * @param n The number you want to sum a sequence of.
+     * @return sum The sum of the sequence of the number passed in.
+     */
+    public static int sumSequence(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Expecting a value 0 or above");
+        }
+        int sum = 0;
+        
+        for (int i = 1; i <= n; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+    
     // formula Hn=n(2n−1)
     public static int hexagonalNumber(int i) {
         return (int) i * (2*i - 1);
