@@ -1,6 +1,8 @@
 package com.mooip.util;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -145,6 +147,24 @@ public final class StringUtil {
         return mat.find();
     }
 
+    /**
+     * Gets the matches for the passed in regex.
+     * 
+     * @param regex The regex pattern passed in.
+     * @param str The passed in string.
+     * @return matches A list of matches.
+     */
+    public static List<String> getMatches(final String regex, final String str) {
+        Pattern pat = Pattern.compile(regex);
+        Matcher mat = pat.matcher(str);
+        List<String> matches = new ArrayList<String>();
+        while (mat.find()) {
+            matches.add(mat.group());
+        }
+        
+        return matches;
+    }    
+    
     /**
      * Finds the longest repeating pattern.
      * 
