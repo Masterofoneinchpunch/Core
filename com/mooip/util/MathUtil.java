@@ -259,6 +259,17 @@ public final class MathUtil {
     }
     
     /**
+     * Checks these two values to see if they will be part of a Pythagorian Triple.
+     * 
+     * @param a side a.
+     * @param b side b.
+     * @return a true if these two could form a Pythagorian Triple, a false if not.
+     */
+    public static boolean isPythagoreanTriple(int a, int b) {
+        return (Math.sqrt(a * a + b * b) % 1 == 0);
+    }
+    
+    /**
      * Greatest Common Denominator using Euclid's algorithm.
      * 
      * @param a The first variable.
