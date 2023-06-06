@@ -124,7 +124,7 @@ public final class MathUtil {
      */
     public static long addStringDigits(String number) {
         if (number == null) {
-            throw new NullPointerException("The parameter number in addString method should not be null!");
+            throw new NullPointerException("The parameter number in addStringDigits method should not be null!");
         }
         if (number.matches("\\d+") == false) {
             throw new IllegalArgumentException(number + " is not a number.");
@@ -143,7 +143,7 @@ public final class MathUtil {
 
     public static long addFactorialDigits(String number) {
         if (number == null) {
-            throw new NullPointerException("The parameter number in addString method should not be null!");
+            throw new NullPointerException("The parameter number in addFactorialDigits method should not be null!");
         }
         if (number.matches("\\d+") == false) {
             throw new IllegalArgumentException(number + " is not a number.");
@@ -158,6 +158,42 @@ public final class MathUtil {
         }
         
         return result;
+    }
+    
+    /**
+     * Add in each digit squared from the passed in number.   
+     * 
+     * @param number The number.
+     * @return sum The sum of all the digits squared.
+     */
+    public static long addSquareDigits(long number) {
+        long sum = 0;
+        while (number > 0) {
+            long digit = number % 10;
+            sum += (digit * digit);
+            
+            number = number / 10;
+        }
+        
+        return sum;
+    }
+
+    /**
+     * Add in each digit from the passed in number.  This is much faster than addStringDigits. 
+     * 
+     * @param number The number.
+     * @return sum The sum of all the digits.
+     */
+    public static long addDigits(long number) {
+        long sum = 0;
+        while (number > 0) {
+            long digit = number % 10;
+            sum = sum + digit;
+            
+            number = number / 10;
+        }
+        
+        return sum;
     }
     
     /**
@@ -232,6 +268,16 @@ public final class MathUtil {
          return sum;
     }    
 
+    public static int setSum(Set<Integer> set) {
+         int sum = 0; 
+
+         for (int i : set) {
+             sum = sum + i;
+         }
+
+         return sum;
+    }
+    
     /**
      * Gets the nth digit for the passed in number.  This is quite quick.
      * 
@@ -259,11 +305,11 @@ public final class MathUtil {
     }
     
     /**
-     * Checks these two values to see if they will be part of a Pythagorian Triple.
+     * Checks these two values to see if they will be part of a Pythagorean Triple.
      * 
      * @param a side a.
      * @param b side b.
-     * @return a true if these two could form a Pythagorian Triple, a false if not.
+     * @return a true if these two could form a Pythagorean Triple, a false if not.
      */
     public static boolean isPythagoreanTriple(int a, int b) {
         return (Math.sqrt(a * a + b * b) % 1 == 0);
