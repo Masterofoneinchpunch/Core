@@ -1,11 +1,18 @@
 package com.mooip.util;
 
 import java.math.BigInteger;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeSet;
+
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
+
 
 public final class MathUtil {   
     private MathUtil() {
@@ -515,5 +522,64 @@ public final class MathUtil {
     // formula n(3n−2)
     public static int octagonalNumber(int i) {
         return i * (3 * i - 2);
+    }
+    
+    /**
+     * Dijkstra's two-stack algorithm.
+     * 
+     * From link below -> Note: the operators, operands, and parentheses must be
+     * separated by whitespace. Also, each operation must
+     * be enclosed in parentheses. For example, you must write
+     * ( 1 + ( 2 + 3 ) ) instead of ( 1 + 2 + 3 ).
+     * See EvaluateDeluxe.java for a fancier version. 
+     * 
+     * @param evalStr The String to evaluate. 
+     * @return evalValue The evaluated expression.
+     * @see code from here: https://algs4.cs.princeton.edu/13stacks/Evaluate.java.html
+     * @see code https://algs4.cs.princeton.edu/13stacks/EvaluateDeluxe.java.html 
+     */
+    public static Double evaluateTwoStack(String evalStr) {
+        String[] str = evalStr.split("\\s+");
+        ArrayDeque<String> ops  = new ArrayDeque<String>();
+        ArrayDeque<Double> vals = new ArrayDeque<Double>();
+
+        for (String s : str) {
+            if      (s.equals("("));
+            else if (s.equals("+"))    ops.push(s);
+            else if (s.equals("-"))    ops.push(s);
+            else if (s.equals("*"))    ops.push(s);
+            else if (s.equals("/"))    ops.push(s);
+            else if (s.equals("sqrt")) ops.push(s);
+            else if (s.equals(")")) {
+                String op = ops.pop();
+                double v = vals.pop();
+                if      (op.equals("+"))    v = vals.pop() + v;
+                else if (op.equals("-"))    v = vals.pop() - v;
+                else if (op.equals("*"))    v = vals.pop() * v;
+                else if (op.equals("/"))    v = vals.pop() / v;
+                else if (op.equals("sqrt")) v = Math.sqrt(v);
+                vals.push(v);
+            }
+            else vals.push(Double.parseDouble(s));
+        }
+        
+        final Double evalValue = vals.pop();
+        System.out.println(evalStr + " = " + evalValue);
+        
+        return evalValue;
+    }
+    
+    public static Double evaluate(String evalStr) {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+        Double result;
+        try {
+            result = (Double) engine.eval(evalStr);
+        } catch (ScriptException se) {
+            throw new RuntimeException("parameter " + evalStr + " did not parse correctly.");
+        }
+        
+        //System.out.println(evalStr + " = " + result);
+        return result;
     }
 }
