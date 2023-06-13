@@ -525,50 +525,12 @@ public final class MathUtil {
     }
     
     /**
-     * Dijkstra's two-stack algorithm.
+     * Evaluates a string with the JavaScript parser.  This can be a bit slow if used over and over. 
      * 
-     * From link below -> Note: the operators, operands, and parentheses must be
-     * separated by whitespace. Also, each operation must
-     * be enclosed in parentheses. For example, you must write
-     * ( 1 + ( 2 + 3 ) ) instead of ( 1 + 2 + 3 ).
-     * See EvaluateDeluxe.java for a fancier version. 
-     * 
-     * @param evalStr The String to evaluate. 
-     * @return evalValue The evaluated expression.
-     * @see code from here: https://algs4.cs.princeton.edu/13stacks/Evaluate.java.html
-     * @see code https://algs4.cs.princeton.edu/13stacks/EvaluateDeluxe.java.html 
+     * @param evalStr The string to be evaluated.
+     * @return 
+     * @todo check the string to make sure bad values are not pushed in.  This is a security hazard.
      */
-    public static Double evaluateTwoStack(String evalStr) {
-        String[] str = evalStr.split("\\s+");
-        ArrayDeque<String> ops  = new ArrayDeque<String>();
-        ArrayDeque<Double> vals = new ArrayDeque<Double>();
-
-        for (String s : str) {
-            if      (s.equals("("));
-            else if (s.equals("+"))    ops.push(s);
-            else if (s.equals("-"))    ops.push(s);
-            else if (s.equals("*"))    ops.push(s);
-            else if (s.equals("/"))    ops.push(s);
-            else if (s.equals("sqrt")) ops.push(s);
-            else if (s.equals(")")) {
-                String op = ops.pop();
-                double v = vals.pop();
-                if      (op.equals("+"))    v = vals.pop() + v;
-                else if (op.equals("-"))    v = vals.pop() - v;
-                else if (op.equals("*"))    v = vals.pop() * v;
-                else if (op.equals("/"))    v = vals.pop() / v;
-                else if (op.equals("sqrt")) v = Math.sqrt(v);
-                vals.push(v);
-            }
-            else vals.push(Double.parseDouble(s));
-        }
-        
-        final Double evalValue = vals.pop();
-        System.out.println(evalStr + " = " + evalValue);
-        
-        return evalValue;
-    }
-    
     public static Double evaluate(String evalStr) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
@@ -579,7 +541,99 @@ public final class MathUtil {
             throw new RuntimeException("parameter " + evalStr + " did not parse correctly.");
         }
         
-        //System.out.println(evalStr + " = " + result);
         return result;
     }
+    
+    /**
+     * Math Parser for string.
+     * 
+     * @param str The String passed in to be evaluated.
+     * @return parsedValue The string parsed and given back as a value.
+     * @see  <a href="https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form">Awesome code example</a>
+     */
+    public static double eval(final String str) {
+        return new Object() {
+            int pos = -1, ch;
+
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
+
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                return x;
+            }
+
+            // Grammar:
+            // expression = term | expression `+` term | expression `-` term
+            // term = factor | term `*` factor | term `/` factor
+            // factor = `+` factor | `-` factor | `(` expression `)` | number
+            //        | functionName `(` expression `)` | functionName factor
+            //        | factor `^` factor
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if      (eat('+')) x += parseTerm(); // addition
+                    else if (eat('-')) x -= parseTerm(); // subtraction
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if      (eat('*')) x *= parseFactor(); // multiplication
+                    else if (eat('/')) x /= parseFactor(); // division
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return +parseFactor(); // unary plus
+                if (eat('-')) return -parseFactor(); // unary minus
+
+                double x;
+                int startPos = this.pos;
+                if (eat('(')) { // parentheses
+                    x = parseExpression();
+                    if (!eat(')')) throw new RuntimeException("Missing ')'");
+                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else if (ch >= 'a' && ch <= 'z') { // functions
+                    while (ch >= 'a' && ch <= 'z') nextChar();
+                    String func = str.substring(startPos, this.pos);
+                    if (eat('(')) {
+                        x = parseExpression();
+                        if (!eat(')')) throw new RuntimeException("Missing ')' after argument to " + func);
+                    } else {
+                        x = parseFactor();
+                    }
+                    if (func.equals("sqrt")) x = Math.sqrt(x);
+                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
+                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
+                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                    else throw new RuntimeException("Unknown function: " + func);
+                } else {
+                    throw new RuntimeException("Unexpected: " + (char)ch);
+                }
+
+                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+
+                return x;
+            }
+        }.parse();
+    }       
 }
