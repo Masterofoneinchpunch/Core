@@ -1,12 +1,10 @@
 package com.mooip.util;
 
 import java.math.BigInteger;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 import java.util.TreeSet;
 
 import javax.script.ScriptEngineManager;
@@ -251,20 +249,29 @@ public final class MathUtil {
      * 
      * @param number The passed in number
      * @return sumProperDivisors The sum of the proper divisors.
-     * @todo Rewrite this to use prime factorization.
+     * @see https://www.geeksforgeeks.org/sum-of-all-proper-divisors-of-a-natural-number/ 
      */
-    public static int sumProperDivisors(final long number) {
+    public static int sumProperDivisors(final int number) {
         int sumProperDivisors = 0;
-        
-        for (long i = number / 2; i > 0; i--) {
-            if (number % i == 0) {
-                sumProperDivisors += i;
-            }
+       
+        if (number == 1) {
+            return sumProperDivisors; // no proper divisor
         }
         
-        return sumProperDivisors;
+        for (int i = 2; i <= (int) Math.sqrt(number); i++) {            
+            if (number % i == 0) {
+                // if both divisors are same add it only once else add both
+                if (i == (number / i)) {
+                    sumProperDivisors += i;
+                } else { 
+                    sumProperDivisors += (i + number / i);
+                }
+            }
+        }
+ 
+        return (sumProperDivisors + 1);
     }
-
+     
     public static int listSum(List<Integer> list) {
          int sum = 0; 
 
@@ -636,4 +643,18 @@ public final class MathUtil {
             }
         }.parse();
     }       
+
+    public static BigInteger sqrt(BigInteger x) {
+        BigInteger div = BigInteger.ZERO.setBit(x.bitLength()/2);
+        BigInteger div2 = div;
+        // Loop until we hit the same value twice in a row, or wind
+        // up alternating.
+        for(;;) {
+            BigInteger y = div.add(x.divide(div)).shiftRight(1);
+            if (y.equals(div) || y.equals(div2))
+                return y;
+            div2 = div;
+            div = y;
+        }
+    }
 }
